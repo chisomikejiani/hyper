@@ -139,9 +139,9 @@ class HTTP20Adapter(HTTPAdapter):
         response.status_code = resp.status
         response.headers = CaseInsensitiveDict((
             map(to_native_string, h)
-            for h in resp.headers.iter_
-            
+            for h in resp.headers.iter_raw()
         ))
+        
         print resp.headers
         print "first\n" 
         print response.headers
