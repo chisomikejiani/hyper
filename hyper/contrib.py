@@ -199,9 +199,7 @@ class HTTP20Adapter(HTTPAdapter):
         orig.version = 20
         orig.status = resp.status
         orig.reason = resp.reason
-        print resp.headers
         orig.msg = FakeOriginalResponse(resp.headers.iter_raw())
-        print orig.msg
         return response
 
     def close(self):
