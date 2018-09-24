@@ -137,12 +137,10 @@ class HTTP20Adapter(HTTPAdapter):
         response = Response()
 
         response.status_code = resp.status
-#         response.headers = CaseInsensitiveDict((
-#             map(to_native_string, h)
-#             for h in resp.headers.iter_raw()
-#         ))
-
-        response.headers = CaseInsensitiveDict(getattr(resp, 'headers', {}))
+        response.headers = CaseInsensitiveDict((
+            map(to_native_string, h)
+            for h in resp.headers.iter_raw()
+        ))
         print response.headers
         response.raw = resp
         response.reason = resp.raw.reason
