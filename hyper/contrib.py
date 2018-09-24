@@ -137,12 +137,15 @@ class HTTP20Adapter(HTTPAdapter):
         response = Response()
 
         response.status_code = resp.status
-        response.headers = CaseInsensitiveDict((
-            map(to_native_string, h)
-            for h in resp.headers.iter_raw()
-        ))
+#         response.headers = CaseInsensitiveDict((
+#             map(to_native_string, h)
+#             for h in resp.headers.iter_raw()
+#         ))
+
+        response.headers = CaseInsensitiveDict(getattr(resp, 'headers', {}))
+        print response.headers
         response.raw = resp
-        response.reason = resp.reason
+        response.reason = resp.raw.reason
         response.encoding = get_encoding_from_headers(response.headers)
 
         extract_cookies_to_jar(response.cookies, request, response)
@@ -195,8 +198,9 @@ class HTTP20Adapter(HTTPAdapter):
         orig.version = 20
         orig.status = resp.status
         orig.reason = resp.reason
+        print resp.headers
         orig.msg = FakeOriginalResponse(resp.headers.iter_raw())
-
+        print orig.msg
         return response
 
     def close(self):
