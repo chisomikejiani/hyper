@@ -149,7 +149,7 @@ class HTTP20Adapter(HTTPAdapter):
         response.reason = resp.reason
         response.encoding = get_encoding_from_headers(response.headers)
 
-        extract_cookies_to_jar(response.cookies, request, resp)
+        extract_cookies_to_jar(response.cookies, request, response)
         response.url = request.url
 
         response.request = request
