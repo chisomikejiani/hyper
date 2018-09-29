@@ -142,9 +142,9 @@ class HTTP20Adapter(HTTPAdapter):
             for h in resp.headers.iter_raw()
         ))
         
-        print resp.headers
-        print "first\n" 
-        print response.headers
+        
+  
+        response.cookie_jar = resp.headers
         response.raw = resp
         response.reason = resp.reason
         response.encoding = get_encoding_from_headers(response.headers)
