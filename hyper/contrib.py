@@ -145,6 +145,7 @@ class HTTP20Adapter(HTTPAdapter):
         
   
         response.cookie_jar = resp.headers
+        response.reader = resp.read()
         response.raw = resp
         response.reason = resp.reason
         response.encoding = get_encoding_from_headers(response.headers)
